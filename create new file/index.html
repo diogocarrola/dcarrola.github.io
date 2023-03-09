@@ -64,7 +64,7 @@
       <div class="field">
         <label class="label">Nome da Receita</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Nome" value="">
+          <input class="input" type="text" id="nome" placeholder="Nome" value="">
         </div>
       </div>
     
@@ -72,7 +72,7 @@
         <label class="label">Tipo de Prato</label>
         <div class="control">
           <div class="select">
-          <select>
+          <select id="prato">
             <option>Selecionar</option>
             <option>Sopa</option>
             <option>Prato</option>
@@ -112,7 +112,7 @@
         <label class="label">Ingredientes</label>
         <div class="control">
           <div class="select">
-          <select>
+          <select id="ingredientes">
             <div
             x-data="{search: '', items: ['batata', 'agrião', 'cebola'],
               get filteredItems()
@@ -138,7 +138,7 @@
 
       <div class="field is-grouped">
         <div class="control">
-        <button class="button is-link">Criar Ficha</button>
+        <button @click="saveFile()" class="button is-link">Criar Ficha</button>
         </div>
         <div class="control">
         <button class="button is-link is-light">Cancelar</button>
@@ -158,5 +158,41 @@
     </div>
   <!-- END FOOTER -->
 </body>
+
+<script>
+  let saveFile = () => {
+
+    // Get the data from each element on the form.
+    const nome = document.getElementById('nome');
+    const prato = document.getElementById('prato');
+    const idade = document.getElementById('idade');
+    const ingredientes = document.getElementById('ingredientes');
+
+    // This variable stores all the data.
+    let data = 
+        '\r Nome: ' + nome.value + ' \r\n ' + 
+        'Tipo de Prato: ' + prato.value + ' \r\n ' + 
+        'Faixa Etária: ' + idade.value + ' \r\n ' + 
+        'Ingredientes: ' + ingredientes.value;
+
+    // Convert the text to BLOB.
+    const textToBLOB = new Blob([data], { type: 'text/plain' });
+    const sFileName = 'newfile.txt';	   // The file to save the data.
+
+    let newLink = document.createElement("a");
+    newLink.download = sFileName;
+
+    if (window.webkitURL != null) {
+      newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+    }
+    else {
+      newLink.href = window.URL.createObjectURL(textToBLOB);
+      newLink.style.display = "none";
+      document.body.appendChild(newLink);
+    }
+
+    newLink.click();
+  }
+</script>
 
 </html>
