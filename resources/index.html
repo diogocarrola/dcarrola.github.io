@@ -54,7 +54,7 @@
 			</div>
 		</div>
 	</nav>
-	<!-- END NAV -->
+  <!-- END NAV -->
 
   <!-- START CONTENT -->
 	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
@@ -103,7 +103,7 @@
 	</style>
 
 	<div class="container mx-auto py-6 px-4" x-data="datatables()" x-cloak>
-		<h1 class="text-3xl py-4 border-b mb-10">Tabela de Composição dos Alimentos</h1>
+		<h1 class="text-3xl py-4 border-b mb-10">Tabela de Composição dos Alimentos (TCA)</h1>
 
 		<div x-show="selectedRows.length" class="bg-teal-200 fixed top-0 left-0 right-0 z-40 w-full shadow">
 			<div class="container mx-auto px-4 py-4">
@@ -189,35 +189,32 @@
 					</tr>
 				</thead>
 				<tbody>
-					<template x-for="user in users" :key="user.userId">
+					<template x-for="alimento in alimentos" :key="alimento.codigo">
 						<tr>
 							<td class="border-dashed border-t border-gray-200 px-3">
 								<label
 									class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
-									<input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="user.userId"
-											@click="getRowDetail($event, user.userId)">
+									<input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="alimento.codigo"
+											@click="getRowDetail($event, alimento.codigo)">
 								</label>
 							</td>
-							<td class="border-dashed border-t border-gray-200 userId">
-								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="user.codigo"></span>
+							<td class="border-dashed border-t border-gray-200 codigo">
+								<span class="text-gray-700 px-6 py-3 flex items-center"	x-text="alimento.codigo"></span>
 							</td>
-							<td class="border-dashed border-t border-gray-200 firstName">
-								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="user.firstName"></span>
+							<td class="border-dashed border-t border-gray-200 nome_alimento">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.nome_alimento"></span>
 							</td>
-							<td class="border-dashed border-t border-gray-200 lastName">
-								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="user.lastName"></span>
+							<td class="border-dashed border-t border-gray-200 energia_cal">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.energia_cal"></span>
 							</td>
-							<td class="border-dashed border-t border-gray-200 emailAddress">
-								<span class="text-gray-700 px-6 py-3 flex items-center"
-									x-text="user.emailAddress"></span>
+							<td class="border-dashed border-t border-gray-200 energia_j">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.energia_j"></span>
 							</td>
-							<td class="border-dashed border-t border-gray-200 gender">
-								<span class="text-gray-700 px-6 py-3 flex items-center"
-									x-text="user.gender"></span>
+							<td class="border-dashed border-t border-gray-200 lipidos">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.lipidos"></span>
 							</td>
-							<td class="border-dashed border-t border-gray-200 phoneNumber">
-								<span class="text-gray-700 px-6 py-3 flex items-center"
-									x-text="user.phoneNumber"></span>
+							<td class="border-dashed border-t border-gray-200 acidos_saturados">
+								<span class="text-gray-700 px-6 py-3 flex items-center"	x-text="alimento.acidos_saturados"></span>
 							</td>
 						</tr>
 					</template>
@@ -255,13 +252,13 @@
 						'value': 'Ácidos Gordos Saturados [g]'
 					}
 				],
-				users: [{
+				alimentos: [{
 					"codigo": 1,
-					"firstName": "Cort",
-					"lastName": "Tosh",
-					"emailAddress": "ctosh0@github.com",
-					"gender": "Male",
-					"phoneNumber": "327-626-5542"
+					"nome_alimento": "Abacate",
+					"energia_cal": "114",
+					"energia_j": "470",
+					"lipidos": "10,5",
+					"acidos_saturados": "2,2"
 				}, {
 					"userId": 15,
 					"firstName": "Lorelle",
@@ -320,8 +317,7 @@
 			}
 		}
 	</script>
-</div>
-	<!-- END CONTENT -->
+  <!-- END CONTENT -->
 
   <!-- START FOOTER -->
   <footer class="footer">
