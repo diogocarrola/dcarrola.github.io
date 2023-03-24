@@ -319,22 +319,6 @@
 			}
 		}
 	</script>
-	---
-	layout: default
-	title: People Involved in the Chan Zuckerberg Initiative
-	---
-
-	<!-- People -->
-	{% assign people = site. %}
-	{% assign people = people | sort:"Name" %}
-
-	<!-- Document -->
-	{% for person in people %}
-			
-	<ul>
-		<li><strong>{{ person.Name }}</strong> ({{ person.Organization }}, {{ person.Role }})</li>
-	</ul>
-	{% endfor %}
   <!-- END CONTENT -->
 
   <!-- START FOOTER -->
