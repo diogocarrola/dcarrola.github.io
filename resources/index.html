@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../assets/css/bulma.min.css">
+  <link href="https://unpkg.com/tailwindcss@1.2.0/dist/tailwind.min.css" rel="stylesheet">
+  <!-- JS -->
+  <script defer type="text/javascript" src="../assets/js/bulma.js"></script>
+  <script defer type="text/javascript" src="../assets/js/alpine.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+</head>
+
+<body>
+  <!-- START HERO -->
+  <section class="hero"
+  style="background-color: rgba(255, 214, 0, 1.000);"
+  style="background-image: url('');background-position: center;background-size: cover;background-repeat: no-repeat;">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Alface, Limão é Nutrição!</h1>
+    </div>
+  </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- START NAV -->
+	<nav class="navbar is-" style="background-color:rgba(0,175,138,1.000);">
+		<div class="container">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="../index.html">
+					<img src="" width="200" height="30">
+				</a>
+				<span class="navbar-burger burger" data-target="navbarMenu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</div>
+			<div id="navbarMenu" class="navbar-menu">
+				<div class="navbar-end">
+					<a class="navbar-item" href="../index.html">
+						Início
+					</a>
+					<a class="navbar-item" href="../create new file/index.html">
+						Criar Nova Ficha Técnica
+          </a>
+          <a class="navbar-item is-active" href="index.html">
+          Recursos
+          </a>
+				</div>
+			</div>
+		</div>
+	</nav>
+  <!-- END NAV -->
+
+  <!-- START CONTENT -->
+  <class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+  <div class="antialiased sans-serif bg-gray-200 h-screen">
+	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+	<style>
+		[x-cloak] {
+			display: none;
+		}
+
+		[type="checkbox"] {
+			box-sizing: border-box;
+			padding: 0;
+		}
+
+		.form-checkbox {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			-webkit-print-color-adjust: exact;
+			color-adjust: exact;
+			display: inline-block;
+			vertical-align: middle;
+			background-origin: border-box;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			flex-shrink: 0;
+			color: currentColor;
+			background-color: #fff;
+			border-color: #e2e8f0;
+			border-width: 1px;
+			border-radius: 0.25rem;
+			height: 1.2em;
+    		width: 1.2em;
+		}
+
+		.form-checkbox:checked {
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+			border-color: transparent;
+			background-color: currentColor;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	</style>
+
+	<div class="container mx-auto py-6 px-4" x-data="datatables()" x-cloak>
+		<h1 class="text-3xl py-4 border-b mb-10">Tabela de Composição dos Alimentos (TCA)</h1>
+
+		<div x-show="selectedRows.length" class="bg-teal-200 fixed top-0 left-0 right-0 z-40 w-full shadow">
+			<div class="container mx-auto px-4 py-4">
+				<div class="flex md:items-center">
+					<div class="mr-4 flex-shrink-0">
+						<svg class="h-8 w-8 text-teal-600"  viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+					</div>
+					<div x-html="selectedRows.length + ' rows are selected'" class="text-teal-800 text-lg"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mb-4 flex justify-between items-center">
+			<div class="flex-1 pr-4">
+				<div class="relative md:w-1/3">
+					<input type="search"
+						class="w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+						placeholder="Pesquisar...">
+					<div class="absolute top-0 left-0 inline-flex items-center p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" viewBox="0 0 24 24"
+							stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+							stroke-linejoin="round">
+							<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+							<circle cx="10" cy="10" r="7" />
+							<line x1="21" y1="21" x2="15" y2="15" />
+						</svg>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="shadow rounded-lg flex">
+					<div class="relative">
+						<button @click.prevent="open = !open"
+							class="rounded-lg inline-flex items-center bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4">
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:hidden" viewBox="0 0 24 24"
+								stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+								stroke-linejoin="round">
+								<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+								<path
+									d="M5.5 5h13a1 1 0 0 1 0.5 1.5L14 12L14 19L10 16L10 12L5 6.5a1 1 0 0 1 0.5 -1.5" />
+							</svg>
+							<span class="hidden md:block">Ver</span>
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" width="24" height="24"
+								viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+								stroke-linecap="round" stroke-linejoin="round">
+								<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+								<polyline points="6 9 12 15 18 9" />
+							</svg>
+						</button>
+
+						<div x-show="open" @click.away="open = false"
+							class="z-40 absolute top-0 right-0 w-40 bg-white rounded-lg shadow-lg mt-12 -mr-1 block py-1 overflow-hidden">
+							<template x-for="heading in headings">
+								<label
+									class="flex justify-start items-center text-truncate hover:bg-gray-100 px-4 py-2">
+									<div class="text-teal-600 mr-3">
+										<input type="checkbox" class="form-checkbox focus:outline-none focus:shadow-outline" checked @click="toggleColumn(heading.key)">
+									</div>
+									<div class="select-none text-gray-700" x-text="heading.value"></div>
+								</label>
+							</template>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
+			style="height: 405px;">
+			<table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+				<thead>
+					<tr class="text-left">
+						<th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+							<label
+								class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+								<input type="checkbox" class="form-checkbox focus:outline-none focus:shadow-outline" @click="selectAllCheckbox($event);">
+							</label>
+						</th>
+						<template x-for="heading in headings">
+							<th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs"
+								x-text="heading.value" :x-ref="heading.key" :class="{ [heading.key]: true }"></th>
+						</template>
+					</tr>
+				</thead>
+				<tbody>
+					<template x-for="alimento in alimentos" :key="alimento.codigo">
+						<tr>
+							<td class="border-dashed border-t border-gray-200 px-3">
+								<label
+									class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+									<input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="alimento.codigo"
+											@click="getRowDetail($event, alimento.codigo)">
+								</label>
+							</td>
+							<td class="border-dashed border-t border-gray-200 codigo">
+								<span class="text-gray-700 px-6 py-3 flex items-center"	x-text="alimento.codigo"></span>
+							</td>
+							<td class="border-dashed border-t border-gray-200 nome_alimento">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.nome_alimento"></span>
+							</td>
+							<td class="border-dashed border-t border-gray-200 energia_cal">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.energia_cal"></span>
+							</td>
+							<td class="border-dashed border-t border-gray-200 energia_j">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.energia_j"></span>
+							</td>
+							<td class="border-dashed border-t border-gray-200 lipidos">
+								<span class="text-gray-700 px-6 py-3 flex items-center" x-text="alimento.lipidos"></span>
+							</td>
+							<td class="border-dashed border-t border-gray-200 acidos_saturados">
+								<span class="text-gray-700 px-6 py-3 flex items-center"	x-text="alimento.acidos_saturados"></span>
+							</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		function datatables() {
+		  return {
+			headings: [
+			  {
+				'key': 'codigo',
+				'value': 'Código'
+			  },
+			  {
+				'key': 'nome_alimento',
+				'value': 'Nome do Alimento'
+			  },
+			  {
+				'key': 'energia_cal',
+				'value': 'Energia [kcal]'
+			  }
+			],
+			alimentos: [],
+			selectedRows: [],
+			open: false,
+			
+			toggleColumn(key) {
+			  // Note: All td must have the same class name as the headings key! 
+			  let columns = document.querySelectorAll('.' + key);
+	
+			  if (this.$refs[key].classList.contains('hidden') && this.$refs[key].classList.contains(key)) {
+				columns.forEach(column => {
+				  column.classList.remove('hidden');
+				});
+			  } else {
+				columns.forEach(column => {
+				  column.classList.add('hidden');
+				});
+			  }
+			},
+	
+			getRowDetail($event, id) {
+			  let rows = this.selectedRows;
+	
+			  if (rows.includes(id)) {
+				let index = rows.indexOf(id);
+				rows.splice(index, 1);
+			  } else {
+				rows.push(id);
+			  }
+			},
+	
+			selectAllCheckbox($event) {
+			  let columns = document.querySelectorAll('.rowCheckbox');
+	
+			  this.selectedRows = [];
+	
+			  if ($event.target.checked == true) {
+				columns.forEach(column => {
+				  column.checked = true
+				  this.selectedRows.push(parseInt(column.name))
+				});
+			  } else {
+				columns.forEach(column => {
+				  column.checked = false
+				});
+				this.selectedRows = [];
+			  }
+			},
+	
+			getData: function() {
+			  gapi.client.sheets.spreadsheets.values.get({
+				spreadsheetId: '125ydptucS-v3YhPNQBYwGTcBZH_PKCwh2o2-9qT8w-k',
+				range: 'Folha1!A2:C4',
+				// Optional parameters:
+				// majorDimension: "ROWS",
+				// valueRenderOption: "FORMATTED_VALUE",
+				// dateTimeRenderOption: "SERIAL_NUMBER"
+			  }).then(function(response) {
+				// Handle the response from the API
+				this.alimentos = response.result.values.map((row) => {
+				  const obj = {}
+				  row.forEach((cell, index) => {
+					obj[this.headings[index].key] = cell
+				  })
+				  return obj
+				})
+			  }.bind(this), function(error) {
+				console.error("Error retrieving data:", error.result.error.message);
+				throw error;
+			  });
+			}
+		  }
+		}
+	
+		// Load the Google Sheets API client library
+		gapi.load("client", function() {
+		  gapi.client.init({
+			apiKey: "AIzaSyD1pWTxkyASkm19_GH5Lj7dI-muQ36I1Uw"
+		  });
+		});
+	</script>
+
+	<!-- HTML Table Structure -->
+<table id="myTable" class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Código</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome do Alimento</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Energia [kcal]</th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200"></tbody>
+</table>
+
+<!-- JavaScript to fetch data from Google Sheets and populate the table -->
+<script>
+  // Client ID and API key from the Developer Console
+  var CLIENT_ID = 'Y1076562147063-33qtout4mv1216krkce0397224oq527s.apps.googleusercontent.com';
+  var API_KEY = 'AIzaSyD1pWTxkyASkm19_GH5Lj7dI-muQ36I1Uw';
+
+  // ID of the spreadsheet to fetch data from
+  var SPREADSHEET_ID = '125ydptucS-v3YhPNQBYwGTcBZH_PKCwh2o2-9qT8w-k';
+
+  // Range of the data to fetch
+  var RANGE = 'Folha1!A2:C4';
+
+  // Load the Google Sheets API client library
+  gapi.load('client', start);
+
+  function start() {
+    // Initialize the API client library
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      scope: 'https://www.googleapis.com/auth/spreadsheets.readonly'
+    }).then(function() {
+      // Call the Google Sheets API to fetch data
+      gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: RANGE
+      }).then(function(response) {
+        var data = response.result.values;
+        var tbody = document.querySelector('#myTable tbody');
+        data.forEach(function(row) {
+          var tr = document.createElement('tr');
+          row.forEach(function(cell) {
+            var td = document.createElement('td');
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      }, function(reason) {
+        console.error('Error: ' + reason.result.error.message);
+      });
+    });
+  }
+</script>
+  <!-- END CONTENT -->
+
+  <!-- START FOOTER -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Produzido por Diogo Carrola & Beatriz Baptista &copy; 2023<br>
+        <strong>Todos os direitos reservados</strong>
+      </p>
+    </div>
+  <!-- END FOOTER -->
+</body>
+
+</html>
